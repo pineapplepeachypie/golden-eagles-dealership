@@ -1,0 +1,165 @@
+<!-- Citation for the following code:
+Date: 2023/03/19
+Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app)
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app -->
+
+<!-- vehicle_sales.hbs -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle Sales</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="./css/style.css" rel="stylesheet" type="text/css">
+</head>
+<div class="container">
+<h1>Vehicle Sales Table</h1>
+
+<div class="navbar">
+  [ <a href="/">Home Page</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/vehicles">Vehicles</a> | <a href="/vehicle_sales">Vehicle Sales</a> | <a href="/vehicle_specifications">Vehicle Specifications</a> | <a href="/statuses">Statuses</a>]
+</div>
+</div>
+<br>
+{{! Create a table }}
+<div class="container w-85">
+<table id ='vehicle-sales-table' class="table table-hover">
+
+  {{! Header section }}
+  <thead class="thead-dark">
+
+    {{! For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders }}
+    <tr>
+      {{#each vehicle_sales.[0]}}
+        <th>
+          {{@key}}
+        </th>
+      {{/each}} 
+      <th>Delete</th>
+      </tr>
+      </thead>
+  {{! Body section }}
+<tbody>
+    {{! For each row, print the order_id, customer, employee, VIN, order date and sale price, in order }}
+    {{#each vehicle_sales}}
+      <tr data-value={{this.OrderID}}>
+        <td>{{this.OrderID}}</td>
+        <td>{{this.Customer}}</td>
+        <td>{{this.Employee}}</td>
+        <td>{{this.VIN}}</td>
+        <td>{{this.OrderDate}}</td>
+        <td>{{this.SalePrice}}</td>
+        <td><button onclick="deleteOrder({{this.OrderID}})" type="button" class="btn btn-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">Delete</button></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
+<script src="./js/delete_vehicle_sale.js"></script>
+
+
+{{!-- Form to add a record to the table  --}}
+<div class="container app-forms">
+<h2>Add a New Sale!</h2>
+<p>To add a new vehicle sale, please enter its information below and click 'Submit'!</p>
+<form id="add-vehicle-sale-form-ajax">
+    
+    <label for="input-customer-id">Customer: </label>
+    <select name="input-customer-id" id="input-customer-id">
+      <option value="">Select Customer</option>
+      {{#each customers}}
+      <option value="{{this.customer_id}}">{{this.first_name}} {{this.last_name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="input-emp-id">Employee: </label>
+    <select name="input-emp-id" id="input-emp-id">
+      <option value="">Select Employee</option>
+      {{#each employees}}
+      <option value="{{this.emp_id}}">{{this.first_name}} {{this.last_name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="input-vin-num">VIN Num: </label>
+    <select name="input-vin-num" id="input-vin-num">
+        <option value="">Select a VIN Number</option>
+        {{#each vehicles}}
+        <option value="{{this.vin_num}}">{{this.VIN}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-order-date">Order Date: </label>
+    <input type="date" name="input-order-date" id="input-order-date">
+
+
+    <label for="input-sale-price">Sale Price: </label>
+    <input type="number" name="input-sale-price" id="input-sale-price">
+
+    <input type="submit">
+</form>
+</div>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_vehicle_sale.js"></script>
+
+<div class="container app-forms">
+<h2>Updating A Vehicle Sale Form</h2>
+<p>To update a Vehicle Sale information</p>
+<form id="update-vehicle-sale-form-ajax">
+
+        <label for="update-order-id">Order ID: </label>
+    <select name="update-order-id" id="selectOrder">
+        <option value="test">Select an Order</option>
+        {{#each vehicle_sales}}
+        <option value="{{this.OrderID}}">{{this.OrderID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="update-customer-id">Customer: </label>
+    <select name="update-customer-id" id="update-customer-id">
+      <option value="">Select Customer</option>
+      {{#each customers}}
+      <option value="{{this.customer_id}}">{{this.first_name}} {{this.last_name}}</option>
+      {{/each}}
+      <option value="NULL">None</option>
+    </select>
+
+    <tr>
+    <label for="update-emp-id">Employee: </label>
+    <select name="update-emp-id" id="update-emp-id">
+      <option value="">Select Employee</option>
+      {{#each employees}}
+      <option value="{{this.emp_id}}">{{this.first_name}} {{this.last_name}}</option>
+      {{/each}}
+      <option value="NULL">None</option>
+    </select>
+      <!-- <td>*Required</td> -->
+    </tr>
+    <tr>
+    <label for="update-vin-num">VIN Num: </label>
+    <select name="update-vin-num" id="update-vin-num">
+        <option value="">Select a VIN Number</option>
+        {{#each vehicles}}
+        <option value="{{this.vin_num}}">{{this.VIN}}</option>
+        {{/each}}
+    </select>
+    </tr>
+
+      <!-- <td>*Required</td> -->
+    </tr>
+    <tr>
+      <td><label for='update-order-date'>Order Date: </label></td>
+      <td><input type='date' name='update-order-date' id='update-order-date'/></td>
+    <!-- <td>*Required</td> -->
+    </tr>
+    <tr>
+      <td><label for='update-sale-price'>Sale Price: </label></td>
+      <td><input type='number' name='update-sale-price' id='update-sale-price'/></td>
+    </tr>
+
+    <input type="submit">
+</form>
+</div>
+<script src="./js/update_vehicle_sale.js"></script>

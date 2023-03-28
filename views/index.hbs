@@ -1,0 +1,71 @@
+<!-- Citation for the following code:
+Date: 2023/03/19
+Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app)
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app -->
+
+<!-- index.hbs main page-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GE Home Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="./css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Golden Eagles Dealership Database 🦅 </h1>
+    <div class="navbar">
+        [ <a href="/">Home Page</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/vehicles">Vehicles</a> | <a href="/vehicle_sales">Vehicle Sales</a> | <a href="/vehicle_specifications">Vehicle Specifications</a> | <a href="/statuses">Statuses</a>]
+        </div>
+<br>
+<div class="description">
+<p>
+    Welcome to Golden Eagles Dealership Database. Golden Eagles (GE) auto dealership offers various selection of vehicles – sedans, SUVs, trucks, sports cars, and e-vehicles. This database keeps track of their vehicle inventory, their sales, their employees, and most importantly, their customers. Since their sales revenue has gone up from 1 million to 5.5 million per year selling roughly 2,000 vehicles annually, GE wants to keep track of invoices to properly account for revenue and growth. The goal is to design a well-organized database system to drive the sales transactions, to track their vehicle inventory in real time, to pick the best selling sales employee of the month, and to keep the good clientele flow by offering discounts to returning customers. </p>
+</div>
+<br>
+<div class="table_css">
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Table Name</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Customers</td>
+        <td>The customers table will contain data about the customers whether they have purchased a vehicle previously or just shopping. This table will have their name, email, and phone number</td>
+
+    </tr>
+    <tr>
+        <td>Employees</td>
+        <td>The employees table will be keeping track of the current employees and those hired at a later date.</td>
+    </tr>
+    <tr>
+        <td>Vehicles</td>
+        <td>The vehicles table will contain data regarding vehicle inventories</td>
+
+    </tr>
+    <tr>
+        <td>Vehicle Sales</td>
+        <td>The sales table keeps track of all purchase invoices for each vehicle.</td>
+    </tr>
+    <tr>
+        <td>Vehicle Specifications</td>
+        <td>The vehicle description table will contain specific descriptions about each vehicle.</td>
+
+    </tr>
+    <tr>
+        <td>Statuses</td>
+        <td>the status table acts as the “category table” to provide information on whether a particular vehicle is available, on hold, or sold.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+<footer>
+    <p>© 2023 CS 340 Guyllian Dela Rosa and Victoria Sok</p>
+</footer>
+</html>

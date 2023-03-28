@@ -1,0 +1,158 @@
+<!-- Citation for the following code:
+Date: 2023/03/19
+Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app)
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app -->
+
+<!-- vehicles.hbs -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicles</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="./css/style.css" rel="stylesheet" type="text/css">
+</head>
+<div class="container">
+<h1>Vehicles Table</h1>
+
+<div class="navbar">
+  [ <a href="/">Home Page</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/vehicles">Vehicles</a> | <a href="/vehicle_sales">Vehicle Sales</a> | <a href="/vehicle_specifications">Vehicle Specifications</a> | <a href="/statuses">Statuses</a>]
+</div>
+</div>
+<br>
+{{! Create a table }}
+<div class="container w-85">
+<table id ='vehicles-table' class="table table-hover">
+
+  {{! Header section }}
+  <thead class="thead-dark">
+
+    {{! For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders }}
+    <tr>
+      {{#each vehicle.[0]}}
+        <th>
+          {{@key}}
+        </th>
+      {{/each}}
+    </tr>
+  </thead>
+
+  {{! Body section }}
+  <tbody>
+
+    {{! For each row, print the VIN, Specification, List Price, Status, Year and Color, in order }}
+    {{#each vehicle}}
+      <tr data-value={{this.vin_num}}>
+        <td>{{this.VIN}}</td>
+        <td>{{this.Specification}}</td>
+        <td>{{this.ListPrice}}</td>
+        <td>{{this.Status}}</td>
+        <td>{{this.Year}}</td>
+        <td>{{this.Color}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
+
+{{!-- Form to add a record to the table  --}}
+<div class="container app-forms">
+<h2>Add a New Vehicle!</h2>
+<p>To add a new vehicle, please enter its information below and click 'Submit'!</p>
+<form id="add-vehicle-form-ajax">
+    <label for="input-vin-num">VIN Num: </label>
+    <input type="text" name="input-vin-num" id="input-vin-num">
+    
+    <label for="input-spec-id">Spec: </label>
+    <select name="input-spec-id" id="input-spec-id">
+      <option value="">Select Spec</option>
+      {{#each vehicle_specifications}}
+      <option value="{{this.spec_id}}">{{this.make}} {{this.model}}</option>
+      {{/each}}
+    </select>
+
+    <label for="input-list-price">List Price: </label>
+    <input type="number" name="input-list-price" id="input-list-price">
+
+    <label for="input-status-id">Status: </label>
+    <select name="input-status-id" id="input-status-id">
+      <option value="">Select Status</option>
+      {{#each statuses}}
+      <option value="{{this.status_id}}">{{this.status}}</option>
+      {{/each}}
+    </select>
+
+    <label for="input-year">Year: </label>
+    <input type="number" name="input-year" id="input-year">
+
+    <label for="input-color">Color: </label>
+    <input type="text" name="input-color" id="input-color">
+
+    <input type="submit">
+</form>
+</div>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_vehicle.js"></script>
+
+<div class="container app-forms">
+<h2>Updating A Vehicle Form</h2>
+<p>To update a vehicle's information</p>
+<form id="update-vehicle-form-ajax">
+
+    <label for="update-vin-num">VIN Num: </label>
+    <select name="update-vin-num" id="selectVinNum">
+        <option value="test">Select a VIN Number</option>
+        {{#each vehicle}}
+        <option value="{{this.VIN}}">{{this.VIN}}</option>
+        {{/each}}
+    </select>
+
+    <tr>
+      <td><label for='update-spec-id'>Spec ID: </label>
+      <select name ="update-spec-id" id ="update-spec-id">
+      <option>Select Spec</option>
+        {{#each vehicle_specifications}}
+        <option value="{{this.spec_id}}">{{this.make}} {{this.model}}</option>
+        {{/each}}
+    </select>
+      <!-- <td>*Required</td> -->
+    </tr>
+    <tr>
+      <td><label for='update-list-price'>List Price: </label></td>
+      <td><input
+          type='text'
+          name='update-list-price'
+          id='update-list-price'
+          required
+        /></td>
+      <!-- <td>*Required</td> -->
+    </tr>
+    <tr>
+      <td><label for='update-status-id'>Status: </label></td>
+    <select name="update-status-id" id="update-status-id">
+      <option>Select Status</option>
+        {{#each statuses}}
+        <option value="{{this.status_id}}">{{this.status}}</option>
+        {{/each}}
+    </select>
+    </tr>
+      <!-- <td>*Required</td> -->
+    </tr>
+    <tr>
+      <td><label for='update-year'>Year: </label></td>
+      <td><input type='text' name='update-year' id='update-year'/></td>
+    <!-- <td>*Required</td> -->
+    </tr>
+    <tr>
+      <td><label for='update-color'>Color: </label></td>
+      <td><input type='text' name='update-color' id='update-color'/></td>
+    </tr>
+
+    <input type="submit">
+</form>
+</div>
+<script src="./js/update_vehicle.js"></script>
