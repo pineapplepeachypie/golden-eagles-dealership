@@ -3,6 +3,16 @@
 #co-collaborator: Victoria Sok
 # Database for Golden Eagles Dealership
 
+Citations: 
+
+# Group26 Portfolio Citation 
+// Citation for the following code:
+// Date: 2023/03/19
+// Copied and adapted from OSU GitHub (osu-cs340-ecampus) project (nodejs-starter-app)
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
+// Bootstrap URL: https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css
+
 This project is a database for a fictional auto dealership called Golden Eagles Dealership. The database includes 5 entities and 5 relationships
 as well as 1 Many-to-Many relationship. The entities are customers, employees, vehicles, vehicle specifications, statuses, and 
 vehicle sales. Select and Insert functiionality is available to all the tables, Update and Delete are available to customers, employees, and 
